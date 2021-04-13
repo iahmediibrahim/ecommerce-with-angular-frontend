@@ -52,13 +52,13 @@
                         "tsConfig": "tsconfig.app.json",
                         "aot": true,
                         "assets": [ "src/favicon.ico", "src/assets" ],
-                        "styles": [ "src/styles.scss" ],
+                        "styles": [ "src/styles.scss", "node_modules/ngx-toastr/toastr.css" ],
                         "scripts": [
-                            "src/assets/js/bootstrap.min.js",
                             "src/assets/js/jquery.min.js",
-                            "src/assets/js/jquery.zoom.min.js",
+                            "src/assets/js/bootstrap.min.js",
                             "src/assets/js/slick.min.js",
-                            "src/assets/js/nouislider.min.js"
+                            "src/assets/js/nouislider.min.js",
+                            "src/assets/js/jquery.zoom.min.js"
                         ]
                     },
                     "configurations": {

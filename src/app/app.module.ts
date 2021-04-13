@@ -10,23 +10,31 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProductComponent } from './components/product/product.component';
 import { ThankyouComponent } from './components/thankyou/thankyou.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    CartComponent,
-    CheckoutComponent,
-    HomeComponent,
-    ProductComponent,
-    ThankyouComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        CartComponent,
+        CheckoutComponent,
+        HomeComponent,
+        ProductComponent,
+        ThankyouComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        NgxSpinnerModule,
+        ToastrModule.forRoot(),
+    ],
+    providers: [],
+    bootstrap: [ AppComponent ],
 })
-export class AppModule { }
+export class AppModule {}
