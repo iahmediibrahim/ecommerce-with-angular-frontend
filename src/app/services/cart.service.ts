@@ -157,6 +157,7 @@ export class CartService {
             this.cartData$.next({ ...this.cartDataServer });
         } else {
             data.numInCart--;
+
             if (data.numInCart < 1) {
                 this.deleteProductFromCart(index);
                 this.cartData$.next({ ...this.cartDataServer });
@@ -217,7 +218,6 @@ export class CartService {
             const { numInCart } = p;
             const { price } = p.product;
             total += numInCart * price;
-            console.log(numInCart, price);
         });
         this.cartDataServer.total = total;
         this.cartTotal$.next(this.cartDataServer.total);
@@ -269,11 +269,10 @@ export class CartService {
         });
     }
 
-    calculateSubTotal(index): Number {
+    calculateSubTotal(index): number {
         let subTotal = 0;
 
         let p = this.cartDataServer.data[index];
-        // @ts-ignore
         subTotal = p.product.price * p.numInCart;
 
         return subTotal;

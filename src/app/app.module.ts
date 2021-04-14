@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -32,6 +33,8 @@ import { ToastrModule } from 'ngx-toastr';
         HttpClientModule,
         BrowserAnimationsModule,
         NgxSpinnerModule,
+        ReactiveFormsModule,
+        FormsModule,
         ToastrModule.forRoot(),
     ],
     providers: [],
