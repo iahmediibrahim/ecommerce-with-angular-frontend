@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product, ServerResponse } from '../models/product.model';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -27,5 +28,19 @@ export class ProductService {
     // get products from one category
     getProductsFromCategory(categoryName: string): Observable<Product[]> {
         return this.http.get<Product[]>(this.SERVER_URL + '/products/category/' + categoryName);
+    }
+
+    deleteProduct(productId): Observable<any> {
+        return this.http
+            .delete<{ message?: string; status: string }>(`${this.SERVER_URL}/products/delete/${productId}`)
+            .pipe(
+                switchMap(async (data) => {
+                    const prods = await this.getAllProducts().toPromise();
+                    return {
+                        ...data,
+                        ...prods,
+                    };
+                }),
+            );
     }
 }

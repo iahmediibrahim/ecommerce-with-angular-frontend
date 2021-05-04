@@ -1,3 +1,4 @@
+import { RegisterComponent } from './components/register/register.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -15,7 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { LoginComponent } from './components/login/login.component';
+import {
+    SocialLoginModule,
+    SocialAuthServiceConfig,
+    GoogleLoginProvider,
+    FacebookLoginProvider,
+} from 'angularx-social-login';
+import { ManageProductsComponent } from './components/admin/manage-products/manage-products.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -26,6 +34,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         HomeComponent,
         ProductComponent,
         ThankyouComponent,
+        LoginComponent,
+        RegisterComponent,
+        ManageProductsComponent,
     ],
     imports: [
         BrowserModule,
@@ -33,11 +44,29 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         HttpClientModule,
         BrowserAnimationsModule,
         NgxSpinnerModule,
-        ReactiveFormsModule,
         FormsModule,
+        ReactiveFormsModule,
         ToastrModule.forRoot(),
+        SocialLoginModule,
     ],
-    providers: [],
+    providers: [
+        {
+            provide: 'SocialAuthServiceConfig',
+            useValue: {
+                autoLogin: false,
+                providers: [
+                    {
+                        id: GoogleLoginProvider.PROVIDER_ID,
+                        provider: new GoogleLoginProvider('clientId'),
+                    },
+                    {
+                        id: FacebookLoginProvider.PROVIDER_ID,
+                        provider: new FacebookLoginProvider('clientId'),
+                    },
+                ],
+            } as SocialAuthServiceConfig,
+        },
+    ],
     bootstrap: [ AppComponent ],
 })
 export class AppModule {}

@@ -1,3 +1,4 @@
+import { UserService } from './../../services/user.service';
 import { Cart } from './../../models/cart.model';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
@@ -10,8 +11,8 @@ import { CartService } from 'src/app/services/cart.service';
 export class HeaderComponent implements OnInit {
     cartData: Cart;
     cartTotal: number;
-
-    constructor(public cartService: CartService) {}
+    authState: boolean;
+    constructor(public cartService: CartService, private userService: UserService) {}
 
     ngOnInit(): void {
         this.cartService.cartTotal$.subscribe((total) => {
@@ -19,5 +20,6 @@ export class HeaderComponent implements OnInit {
         });
 
         this.cartService.cartData$.subscribe((data) => (this.cartData = data));
+        this.userService.authState$.subscribe((auth) => (this.authState = auth));
     }
 }

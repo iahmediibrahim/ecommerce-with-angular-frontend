@@ -223,12 +223,13 @@ export class CartService {
         this.cartTotal$.next(this.cartDataServer.total);
     }
     checkoutFromCart(userId: number) {
-        this.http.post(`${this.SERVER_URL}/oreders/payment`, null).subscribe((res: any) => {
+        this.http.post(`${this.SERVER_URL}/orders/payment`, null).subscribe((res: any) => {
             if (res.success) {
                 this.resetServerData();
                 this.http
                     .post(`${this.SERVER_URL}/orders/new`, { userId, products: this.cartDataClient.productData })
                     .subscribe((data: OrderResponse) => {
+                        console.log(data);
                         this.orderService.getOrder(data.order_id).then((products) => {
                             if (data.success) {
                                 const navigationExtras: NavigationExtras = {
@@ -252,6 +253,15 @@ export class CartService {
                                     };
                                     this.cartTotal$.next(0);
                                     localStorage.setItem('cart', JSON.stringify(this.cartDataClient));
+                                });
+                            } else {
+                                this.spinner.hide().then();
+                                this.router.navigateByUrl('/checkout').then();
+                                this.toast.error(`Sorry, failed to Add the order.`, 'Order Status', {
+                                    timeOut: 1500,
+                                    progressBar: true,
+                                    progressAnimation: 'increasing',
+                                    positionClass: 'toast-top-right',
                                 });
                             }
                         });
